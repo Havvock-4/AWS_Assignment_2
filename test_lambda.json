@@ -1,0 +1,108 @@
+// find a song
+{
+  "resource": "/api/{proxy+}",
+  "path": "/api/music",
+  "httpMethod": "GET",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "queryStringParameters": {
+    "artist": "Taylor",
+    "year": "2017"
+  },
+  "pathParameters": {
+    "proxy": "music"
+  },
+  "body": null,
+  "isBase64Encoded": false
+},
+// login a valid user
+{
+  "resource": "/api/{proxy+}",
+  "path": "/api/login",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "queryStringParameters": null,
+  "pathParameters": {
+    "proxy": "login"
+  },
+  "body": "{\"email\": \"testuser@example.com\", \"password\": \"Abc@123456\"}",
+  "isBase64Encoded": false
+},
+// login a user that does not exist
+{
+  "resource": "/api/{proxy+}",
+  "path": "/api/login",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "queryStringParameters": null,
+  "pathParameters": {
+    "proxy": "login"
+  },
+  "body": "{\"email\": \"testuserdoesnotexist@example.com\", \"password\": \"Abc@123456\"}",
+  "isBase64Encoded": false
+},
+// login a user with wrong password
+{
+  "resource": "/api/{proxy+}",
+  "path": "/api/login",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "queryStringParameters": null,
+  "pathParameters": {
+    "proxy": "login"
+  },
+  "body": "{\"email\": \"testuser@example.com\", \"password\": \"Abcd@123456\"}",
+  "isBase64Encoded": false
+},
+// register a user
+{
+  "resource": "/api/{proxy+}",
+  "path": "/api/register",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "queryStringParameters": null,
+  "pathParameters": {
+    "proxy": "register"
+  },
+  "body": "{\"name\": \"Test User\", \"email\": \"testuser2@example.com\", \"password\": \"Abcd@123456\"}",
+  "isBase64Encoded": false
+},
+// remove subscription of a song
+{
+  "resource": "/api/{proxy+}",
+  "path": "/api/subscriptions",
+  "httpMethod": "DELETE",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "queryStringParameters": null,
+  "pathParameters": {
+    "proxy": "subscriptions"
+  },
+  "body": "{\"email\": \"testuser@example.com\", \"id\": \"d00928f3-5035-43d4-85c2-782c2616e422\"}",
+  "isBase64Encoded": false
+},
+// subscribe to a song
+{
+  "resource": "/api/{proxy+}",
+  "path": "/api/subscriptions",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "queryStringParameters": null,
+  "pathParameters": {
+    "proxy": "subscriptions"
+  },
+  "body": "{\"email\": \"testuser@example.com\", \"id\": \"d00928f3-5035-43d4-85c2-782c2616e422\"}",
+  "isBase64Encoded": false
+}

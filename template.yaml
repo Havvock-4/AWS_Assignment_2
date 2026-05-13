@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  AWS Assignment 2 - Serverless Music Subscription Cloud Application
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 512
+
+Resources:
+  MusicApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: lambda_handler.handler
+      Runtime: python3.11
+      Architectures:
+        - x86_64
+      # Note: We assign the LabRole assuming this is the standard ARN for student labs.
+      # Users should verify or replace this if needed.
+      Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/LabRole"
+      Environment:
+        Variables:
+          AWS_REGION: !Ref "AWS::Region"
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+        Root:
+          Type: Api
+          Properties:
+            Path: /
+            Method: any
+
+Outputs:
+  MusicApi:
+    Description: "API Gateway endpoint URL for Prod environment for Music Application"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/health"
+  MusicApiFunction:
+    Description: "Music API Lambda Function ARN"
+    Value: !GetAtt MusicApiFunction.Arn
