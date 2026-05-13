@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribify - Neo-Brutalist Edition</title>
+    <!-- Google Fonts for Neo-Brutalism -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Animated Background Shapes -->
+    <div class="bg-shape-square"></div>
+    <div class="bg-shape-circle"></div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden-screen"></div>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="auth-wrapper flex-center">
+        <!-- Light Cream Background for Login -->
+        <div class="auth-box neo-card heavy" style="background-color: #FFFDF5;">
+            <div class="auth-beta-tag">BETA</div>
+            
+            <h1 style="font-weight: 900; font-size: 3.5rem; text-align: center; margin-bottom: 2rem;">SUBSCRIBIFY</h1>
+            
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" class="neo-input" placeholder="ENTER EMAIL" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="neo-input" placeholder="ENTER PASSWORD" required>
+                </div>
+                
+                <button type="button" onclick="login()" class="neo-btn primary w-full mt-4">
+                    SIGN IN
+                </button>
+
+                <div style="text-align: center;">
+                    <a class="auth-link" onclick="showRegister()">Don't have an account? Register</a>
+                </div>
+                
+                <div id="login-message" class="toast-msg hidden-screen"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Screen -->
+    <div id="register-screen" class="hidden-screen auth-wrapper flex-center">
+        <!-- Soft Muted Violet Background for Register -->
+        <div class="auth-box neo-card heavy" style="transform: rotate(-1deg); background-color: #C4B5FD;">
+            <h1 style="font-weight: 900; font-size: 3.5rem; text-align: center; margin-bottom: 2rem;">SUBSCRIBIFY</h1>
+            
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" class="neo-input" placeholder="ENTER EMAIL" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Password</label>
+                    <input type="password" id="reg-password" class="neo-input" placeholder="ENTER PASSWORD" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-confirm-password">Confirm Password</label>
+                    <input type="password" id="reg-confirm-password" class="neo-input" placeholder="CONFIRM PASSWORD" required>
+                </div>
+                
+                <button type="button" onclick="register()" class="neo-btn primary w-full mt-4">
+                    CREATE ACCOUNT
+                </button>
+
+                <div style="text-align: center;">
+                    <a class="auth-link" onclick="showLogin()">Already have an account? Login</a>
+                </div>
+                
+                <div id="register-message" class="toast-msg hidden-screen"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="main-screen" class="hidden-screen neo-container" style="max-width: 1400px;">
+        <div class="dashboard-layout">
+            
+            <!-- LEFT COLUMN: Sidebar (Logo + Profile + Filter) -->
+            <aside class="sidebar" style="display: flex; flex-direction: column; gap: 2rem;">
+                
+                <!-- Logo & Profile -->
+                <div class="sidebar-panel">
+                    <div class="sidebar-title">
+                        <h2>Subscribify</h2>
+                    </div>
+                    
+                    <div class="user-profile">
+                        <div class="avatar-circle" id="user-avatar">
+                            U
+                        </div>
+                        <div class="w-full">
+                            <!-- Overflow hidden and ellipsis to prevent email breaking out -->
+                            <h3 id="user-email-display" class="truncate mb-2" style="max-width: 100%; display: inline-block;">email@test.com</h3>
+                            <button type="button" onclick="logout()" class="neo-btn black w-full" style="height: 2.5rem; font-size: 1rem;">
+                                LOG OUT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Query / Filter Area -->
+                <div class="query-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem; padding: 1.5rem; background-color: var(--accent-red);">
+                    <div class="section-header no-border" style="margin-bottom: 0.5rem; grid-column: span 2; padding-bottom: 0;">
+                        <h2 style="font-size: 2rem;">SEARCH</h2>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label style="font-size: 1rem;">Artist Name</label>
+                        <input type="text" id="search-artist" class="neo-input" placeholder="ARTIST" style="height: 3rem;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label style="font-size: 1rem;">Song Title</label>
+                        <input type="text" id="search-title" class="neo-input" placeholder="TITLE" style="height: 3rem;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label style="font-size: 1rem;">Year</label>
+                        <input type="text" id="search-year" class="neo-input" placeholder="YEAR" style="height: 3rem;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label style="font-size: 1rem;">Album</label>
+                        <input type="text" id="search-album" class="neo-input" placeholder="ALBUM" style="height: 3rem;">
+                    </div>
+                    <div class="mt-4" style="grid-column: span 2;">
+                        <button type="button" onclick="searchMusic()" class="neo-btn black w-full" style="font-size: 1rem; height: 3.5rem;">SEARCH DB</button>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- MIDDLE COLUMN: Search Results -->
+            <main class="main-content">
+                <section class="section-panel bg-muted" style="height: 100%;">
+                    <div class="section-header no-border">
+                        <div class="header-icon yellow">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                        </div>
+                        <h2>RESULTS</h2>
+                    </div>
+
+                    <div id="music-results" class="grid-cols-2 mt-8">
+                        <!-- Results rendered via JS -->
+                    </div>
+                </section>
+            </main>
+
+            <!-- RIGHT COLUMN: Subscriptions List -->
+            <aside class="right-sidebar">
+                <section class="section-panel" style="padding: 1.5rem;">
+                    <div class="section-header" style="margin-bottom: 1rem; padding-bottom: 0.5rem;">
+                        <div class="header-icon red" style="width: 2.5rem; height: 2.5rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+                        </div>
+                        <h2 style="font-size: 1.75rem;">YOUR MUSIC</h2>
+                    </div>
+                    
+                    <div id="user-subscriptions" style="display: flex; flex-direction: column;">
+                        <!-- Rendered via JS -->
+                    </div>
+                </section>
+            </aside>
+
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
